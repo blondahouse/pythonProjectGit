@@ -1,19 +1,20 @@
 import random
-MORSE_CODE_DICT = {'A': '.-',       'B': '-...',
-                   'C': '-.-.',     'D': '-..',     'E': '.',
-                   'F': '..-.',     'G': '--.',     'H': '....',
-                   'I': '..',       'J': '.---',    'K': '-.-',
-                   'L': '.-..',     'M': '--',      'N': '-.',
-                   'O': '---',      'P': '.--.',    'Q': '--.-',
-                   'R': '.-.',      'S': '...',     'T': '-',
-                   'U': '..-',      'V': '...-',    'W': '.--',
-                   'X': '-..-',     'Y': '-.--',    'Z': '--..'}
+
+MORSE_CODE_DICT = {'A': '.-', 'B': '-...',
+                   'C': '-.-.', 'D': '-..', 'E': '.',
+                   'F': '..-.', 'G': '--.', 'H': '....',
+                   'I': '..', 'J': '.---', 'K': '-.-',
+                   'L': '.-..', 'M': '--', 'N': '-.',
+                   'O': '---', 'P': '.--.', 'Q': '--.-',
+                   'R': '.-.', 'S': '...', 'T': '-',
+                   'U': '..-', 'V': '...-', 'W': '.--',
+                   'X': '-..-', 'Y': '-.--', 'Z': '--..'}
 
 text = input('Enter your text: ')
 cipher = ''
-for _ in text:
-    if _ != ' ':
-        cipher += MORSE_CODE_DICT[_.upper()] + ' '
+for s in text:
+    if s != ' ':
+        cipher += MORSE_CODE_DICT[s.upper()] + ' '
     else:
         cipher += ' '
 
@@ -27,7 +28,7 @@ pattern = 'not found'
 i = 1
 slice_check = False
 while not slice_check:
-    slices_list = [cipher_cycle_slise_reversed[_:_ + i] for _ in range(0, len(cipher_cycle_slise_reversed), i)]
+    slices_list = [cipher_cycle_slise_reversed[l:l + i] for l in range(0, len(cipher_cycle_slise_reversed), i)]
     slice_check = True
     for index, value in enumerate(slices_list):
         if index != len(slices_list) - 1:
@@ -47,10 +48,10 @@ print(pattern[::-1].replace('  ', ' space ').split())
 cipher_prepared = pattern[::-1].replace('  ', ' space ').split()
 
 decipher = ''
-for _ in cipher_prepared:
-    if _ == 'space':
+for t in cipher_prepared:
+    if t == 'space':
         decipher += ' '
     else:
-        decipher += list(MORSE_CODE_DICT.keys())[list(MORSE_CODE_DICT.values()).index(_)]
+        decipher += list(MORSE_CODE_DICT.keys())[list(MORSE_CODE_DICT.values()).index(t)]
 
-print(decipher.capitalize())
+print(f'Final result: {decipher.capitalize()}')
