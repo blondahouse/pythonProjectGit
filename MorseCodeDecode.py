@@ -53,4 +53,4 @@ for _ in cipher_prepared:
     else:
         decipher += list(MORSE_CODE_DICT.keys())[list(MORSE_CODE_DICT.values()).index(_)]
 
-print(decipher.capitalize())
+print(f'Final result: {decipher.capitalize()}')
