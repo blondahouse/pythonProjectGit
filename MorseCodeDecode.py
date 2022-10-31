@@ -12,17 +12,21 @@ MORSE_CODE_DICT = {'A': '.-', 'B': '-...',
 
 text = input('Enter your text: ')
 cipher = ''
-for s in text:
-    if s != ' ':
-        cipher += MORSE_CODE_DICT[s.upper()] + ' '
+for s, v in enumerate(text):
+    if v != ' ':
+        if s != len(text) - 1 and text[s+1] != ' ':
+            cipher += MORSE_CODE_DICT[v.upper()] + ' '
+        else:
+            cipher += MORSE_CODE_DICT[v.upper()]
     else:
-        cipher += ' '
+        cipher += '  '
+cipher += '   '
 
 cipher_cycle_slise = (cipher * 20)[random.randint(1, len(cipher)):]
 cipher_cycle_slise_reversed = cipher_cycle_slise[::-1]
 
-print(cipher_cycle_slise)
-print(cipher)
+print(f'Basic Coding result is: [{cipher}]')
+print(f'Cycled and shifted code is: {cipher_cycle_slise}')
 
 pattern = 'not found'
 i = 1
@@ -41,17 +45,14 @@ while not slice_check:
     else:
         i += 1
 
-print(pattern[::-1])
-print(pattern[::-1].split())
-print(pattern[::-1].replace('  ', ' space ').split())
-
-cipher_prepared = pattern[::-1].replace('  ', ' space ').split()
+print(f'Defined pattern is: [{pattern[::-1][:len(pattern)-3].replace("  ", " _ ")}]')
+cipher_prepared = pattern[::-1][:len(pattern)-3].replace('  ', ' _ ').split()
 
 decipher = ''
 for t in cipher_prepared:
-    if t == 'space':
+    if t == '_':
         decipher += ' '
     else:
         decipher += list(MORSE_CODE_DICT.keys())[list(MORSE_CODE_DICT.values()).index(t)]
 
-print(f'Final result: {decipher.capitalize()}')
+print(f'Final decoding is: [{decipher}]')
